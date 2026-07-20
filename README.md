@@ -1,126 +1,121 @@
 # 🛡️ IntelliFraud-AI
-## AI Powered Financial Fraud Detection System
+### AI Powered Financial Fraud Detection System
 
 <p align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
-
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi)
-
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit)
-
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?style=for-the-badge&logo=scikitlearn)
-
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-MachineLearning-orange?style=for-the-badge&logo=scikitlearn)
 ![Plotly](https://img.shields.io/badge/Plotly-Visualization-3F4F75?style=for-the-badge&logo=plotly)
+![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
 
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+</p>
 
+---
+
+<p align="center">
+<img src="screenshots/home.png" width="100%">
 </p>
 
 ---
 
 # 📌 Overview
 
-**IntelliFraud-AI** is an enterprise-grade Machine Learning platform designed to detect fraudulent financial transactions in real time.
+IntelliFraud-AI is an Enterprise Machine Learning Platform developed for detecting fraudulent financial transactions in real-time.
 
-The project combines **Machine Learning**, **FastAPI**, and **Streamlit** to provide an end-to-end fraud detection solution with an interactive analytics dashboard, REST API, and enterprise-ready architecture.
+The system integrates
 
-This project demonstrates a complete ML lifecycle:
+- Machine Learning
+- FastAPI
+- Streamlit
+- Interactive Analytics
+- REST API
+- Business Dashboard
 
-- Data Understanding
-- Data Validation
-- Data Cleaning
-- Feature Engineering
-- Model Training
-- Model Evaluation
-- Model Comparison
-- Best Model Selection
-- REST API Deployment
-- Interactive Dashboard
+to deliver an end-to-end fraud detection solution.
 
 ---
 
-# 🚀 Project Highlights
+# ✨ Features
 
-✅ AI Powered Fraud Detection
+✅ Real-Time Fraud Detection
 
-✅ Real-Time Transaction Prediction
-
-✅ Interactive Streamlit Dashboard
-
-✅ FastAPI REST API
+✅ Single Transaction Prediction
 
 ✅ Batch CSV Prediction
 
-✅ Fraud Analytics
+✅ Fraud Analytics Dashboard
 
-✅ Model Performance Comparison
+✅ Machine Learning Model Comparison
 
-✅ Enterprise Folder Structure
+✅ FastAPI REST API
 
 ✅ Download Reports
 
-✅ Production Ready
+✅ Interactive Charts
+
+✅ Production Ready Architecture
 
 ---
 
 # 🌍 Real World Problem
 
-Financial institutions process millions of transactions every day.
+Banks process millions of transactions every day.
 
-Manual fraud detection is:
+Manual fraud detection is
 
 - Slow
-- Expensive
+- Costly
 - Error Prone
 - Difficult to Scale
 
-Even a small delay can result in millions of dollars in financial losses.
+A delayed response may result in massive financial losses.
 
 ---
 
-# 💡 Proposed Solution
+# 💡 Solution
 
-IntelliFraud-AI automatically detects suspicious transactions using Machine Learning models trained on historical credit card transaction data.
+IntelliFraud-AI automatically detects suspicious transactions using Machine Learning.
 
-The system provides:
+The system provides
 
-- Instant Fraud Detection
 - Fraud Probability
 - Confidence Score
-- Interactive Business Dashboard
+- Real-Time Prediction
+- Business Dashboard
 - REST API Integration
 
 ---
 
-# 🏗️ System Architecture
+# 🏗 Architecture
 
 ```text
-Credit Card Transactions
-            │
-            ▼
-    Data Validation
-            │
-            ▼
-      Data Cleaning
-            │
-            ▼
- Feature Engineering
-            │
-            ▼
- Machine Learning Models
-            │
-            ▼
- Best Model Selection
-            │
-            ▼
-      FastAPI Backend
-            │
-            ▼
-   Streamlit Dashboard
-            │
-            ▼
- Fraud Prediction Result
+Transaction
+      │
+      ▼
+Data Validation
+      │
+      ▼
+Data Cleaning
+      │
+      ▼
+Feature Engineering
+      │
+      ▼
+Machine Learning Models
+      │
+      ▼
+Best Model
+      │
+      ▼
+FastAPI Backend
+      │
+      ▼
+Streamlit Dashboard
+      │
+      ▼
+Prediction Result
 ```
 
 ---
@@ -130,79 +125,56 @@ Credit Card Transactions
 ```text
 IntelliFraud-AI/
 
-│── assets/
-│── backend/
-│── config/
-│── data/
-│   ├── raw/
-│   ├── processed/
-│   └── sample/
-│
-│── docs/
-│── frontend/
-│   ├── Home.py
-│   └── pages/
-│
-│── models/
-│── notebooks/
-│── reports/
-│── src/
-│   ├── data/
-│   ├── preprocessing/
-│   ├── models/
-│   ├── evaluation/
-│   ├── explainability/
-│   └── utils/
-│
-│── tests/
-│── requirements.txt
-│── run.py
-│── README.md
-│── LICENSE
+assets/
+backend/
+config/
+data/
+docs/
+frontend/
+models/
+notebooks/
+reports/
+src/
+tests/
+
+run.py
+requirements.txt
+README.md
+LICENSE
 ```
 
 ---
 
 # ⚙️ Technology Stack
 
-## Programming
+### Programming
 
 - Python
 
----
+### Machine Learning
 
-## Machine Learning
-
-- Scikit-Learn
 - Random Forest
 - Logistic Regression
 - Decision Tree
+- Scikit-Learn
 
----
-
-## Backend
+### Backend
 
 - FastAPI
 - Uvicorn
 - Pydantic
 
----
-
-## Frontend
+### Frontend
 
 - Streamlit
 - Plotly
 
----
-
-## Data Processing
+### Data Processing
 
 - Pandas
 - NumPy
 
----
-
-## Model Storage
+### Model Storage
 
 - Joblib
 
@@ -210,134 +182,111 @@ IntelliFraud-AI/
 
 # 📊 Dataset
 
-**Source**
-
-Kaggle Credit Card Fraud Detection Dataset
-
-### Statistics
-
 | Metric | Value |
-|---------|-------|
+|--------|------|
 | Transactions | 284,807 |
 | Fraud Cases | 492 |
 | Features | 30 |
 | Target | Class |
 
----
+Dataset Source
 
-# 🤖 Machine Learning Pipeline
-
-- Data Loading
-- Validation
-- Cleaning
-- Feature Engineering
-- Train/Test Split
-- Model Training
-- Hyperparameter Evaluation
-- Model Comparison
-- Best Model Selection
-- Model Serialization
+Kaggle Credit Card Fraud Detection Dataset
 
 ---
 
-# 📈 Dashboard Modules
+# 📈 Machine Learning Pipeline
 
-### 🏠 Home
+✔ Data Understanding
 
-Project overview and KPIs
+✔ Data Validation
 
----
+✔ Data Cleaning
 
-### 📊 Dashboard
+✔ Feature Engineering
 
-Business metrics and fraud statistics
+✔ Train/Test Split
 
----
+✔ Model Training
 
-### 🤖 Single Prediction
+✔ Model Evaluation
 
-Predict a single transaction
+✔ Model Comparison
 
----
+✔ Best Model Selection
 
-### 📂 Batch Prediction
-
-Predict multiple transactions using CSV
+✔ Deployment
 
 ---
 
-### 📈 Analytics
+# 📷 Project Gallery
 
-Interactive charts
+<table>
 
-- Pie Chart
-- Histogram
-- Scatter Plot
-- Box Plot
-- Correlation Heatmap
+<tr>
 
----
+<td align="center">
+<b>🏠 Home</b><br>
+<img src="screenshots/home.png" width="450">
+</td>
 
-### 📊 Model Performance
+<td align="center">
+<b>📊 Dashboard</b><br>
+<img src="screenshots/dashboard.png" width="450">
+</td>
 
-Comparison of ML models
+</tr>
 
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-- ROC-AUC
+<tr>
 
----
+<td align="center">
+<b>🤖 Prediction</b><br>
+<img src="screenshots/prediction.png" width="450">
+</td>
 
-### 📄 Reports
+<td align="center">
+<b>📈 Analytics</b><br>
+<img src="screenshots/analytics.png" width="450">
+</td>
 
-Download:
+</tr>
 
-- Trained Model
-- Scaler
-- Feature Columns
-- Clean Dataset
-- Model Comparison Report
+<tr>
 
----
+<td align="center">
+<b>📊 Performance</b><br>
+<img src="screenshots/performance.png" width="450">
+</td>
 
-# 📷 Screenshots
+<td align="center">
+<b>📄 Reports</b><br>
+<img src="screenshots/reports.png" width="450">
+</td>
 
-## Home
+</tr>
 
-> Add screenshot here
+<tr>
 
----
+<td align="center">
+<b>ℹ️ About</b><br>
+<img src="screenshots/about.png" width="450">
+</td>
 
-## Dashboard
+<td align="center">
+<b>⚙️ Settings</b><br>
+<img src="screenshots/settings.png" width="450">
+</td>
 
-> Add screenshot here
+</tr>
 
----
-
-## Prediction
-
-> Add screenshot here
-
----
-
-## Analytics
-
-> Add screenshot here
-
----
-
-## Reports
-
-> Add screenshot here
+</table>
 
 ---
 
-# 📈 Model Performance
+# 📊 Model Performance
 
 | Metric | Score |
-|---------|---------|
+|--------|------|
 | Accuracy | 99.95% |
 | Precision | 99% |
 | Recall | 98% |
@@ -351,26 +300,28 @@ Download:
 Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/IntelliFraud-AI.git
+git clone https://github.com/janvichauhan1639-source/IntelliFraud-AI.git
 ```
+
+Move into Project
 
 ```bash
 cd IntelliFraud-AI
 ```
 
-Install Dependencies
+Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run FastAPI
+Run Backend
 
 ```bash
 uvicorn backend.api:app --reload
 ```
 
-Run Streamlit
+Run Frontend
 
 ```bash
 streamlit run frontend/Home.py
@@ -378,38 +329,34 @@ streamlit run frontend/Home.py
 
 ---
 
-# 🌐 Live Demo
+# 🌐 Deployment
 
 ### Streamlit
 
 Coming Soon
 
----
-
 ### FastAPI
 
 Coming Soon
 
----
+### Swagger
 
-### Swagger Docs
-
-Coming Soon
+http://127.0.0.1:8000/docs
 
 ---
 
 # 🔮 Future Enhancements
 
-- Explainable AI (SHAP)
-- LIME Explanations
-- Docker Support
-- Kubernetes Deployment
-- AWS Cloud Deployment
+- SHAP Explainability
+- LIME
+- Docker
+- Kubernetes
+- AWS
+- Azure
 - Kafka Streaming
-- User Authentication
 - Email Alerts
-- Real-Time Monitoring
-- Fraud Risk Scoring
+- User Authentication
+- Live Monitoring
 
 ---
 
@@ -418,11 +365,10 @@ Coming Soon
 - Machine Learning
 - FastAPI
 - Streamlit
-- REST API Development
-- Data Engineering
+- REST API
 - Model Deployment
-- Dashboard Development
-- Enterprise Project Architecture
+- Business Analytics
+- Data Engineering
 
 ---
 
@@ -430,45 +376,34 @@ Coming Soon
 
 Contributions are welcome.
 
-Fork the repository
-
-Create a feature branch
-
-Commit your changes
-
-Submit a Pull Request
-
----
-
-# 📜 License
-
-This project is licensed under the MIT License.
+1. Fork Repository
+2. Create Branch
+3. Commit Changes
+4. Push Branch
+5. Open Pull Request
 
 ---
 
 # 👨‍💻 Developer
 
-**Ayu**
+## Ayu
 
 AI & Machine Learning Developer
 
-GitHub:
+GitHub
+
 https://github.com/janvichauhan1639-source
 
 ---
 
-# ⭐ Support
+# 📄 License
 
-If you found this project useful,
-
-please consider giving it a ⭐ on GitHub.
-
-It helps others discover the project.
+This project is licensed under the MIT License.
 
 ---
 
 <p align="center">
 
-⭐ Thank You for Visiting IntelliFraud-AI ⭐
+⭐ If you like this project, don't forget to give it a Star ⭐
 
 </p>
