@@ -10,7 +10,6 @@ from sklearn.model_selection import train_test_split
 from config.settings import TARGET_COLUMN, TEST_SIZE, RANDOM_STATE
 from config.logging_config import logger
 
-
 def split_dataset(df: pd.DataFrame):
     """
     Split dataset into train and test sets.
