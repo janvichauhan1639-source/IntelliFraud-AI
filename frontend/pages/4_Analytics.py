@@ -4,6 +4,8 @@ Analytics Page
 Advanced Data Analytics
 """
 
+from pathlib import Path
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -14,11 +16,21 @@ st.set_page_config(
     layout="wide"
 )
 
+
 @st.cache_data
 def load_data():
-    return pd.read_csv("data/processed/cleaned_data.csv")
+    base_path = Path(__file__).resolve().parents[2]
+    data_path = base_path / "data" / "processed" / "train.csv"
+
+    if not data_path.exists():
+        st.error(f"Dataset not found:\n{data_path}")
+        st.stop()
+
+    return pd.read_csv(data_path)
+
 
 df = load_data()
+
 st.title("📈 Advanced Fraud Analytics")
 
 st.markdown("""
@@ -27,6 +39,7 @@ feature relationships and business insights.
 """)
 
 st.divider()
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -52,6 +65,7 @@ elif selected_class == "Legitimate":
     filtered_df = filtered_df[filtered_df["Class"] == 0]
 
 st.divider()
+
 c1, c2, c3 = st.columns(3)
 
 with c1:
@@ -73,10 +87,10 @@ with c3:
     )
 
 st.divider()
+
 left, right = st.columns(2)
 
 with left:
-
     fig = px.pie(
         filtered_df,
         names="Class",
@@ -90,7 +104,6 @@ with left:
     )
 
 with right:
-
     fig = px.histogram(
         filtered_df,
         x="Amount",
@@ -104,10 +117,10 @@ with right:
     )
 
 st.divider()
+
 left, right = st.columns(2)
 
 with left:
-
     sample = filtered_df.sample(
         min(5000, len(filtered_df)),
         random_state=42
@@ -127,7 +140,6 @@ with left:
     )
 
 with right:
-
     fig = px.box(
         filtered_df,
         x="Class",
@@ -141,6 +153,7 @@ with right:
     )
 
 st.divider()
+
 st.subheader("Correlation Heatmap")
 
 corr = filtered_df.corr(numeric_only=True)
@@ -157,6 +170,7 @@ st.plotly_chart(
 )
 
 st.divider()
+
 st.subheader("Top 20 Highest Transactions")
 
 top_df = filtered_df.sort_values(
