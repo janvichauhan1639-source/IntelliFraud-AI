@@ -386,7 +386,8 @@ Contributions are welcome.
 
 # 👨‍💻 Developer
 
-## Ayu
+## Janvi chauhan
+
 
 AI & Machine Learning Developer
 
