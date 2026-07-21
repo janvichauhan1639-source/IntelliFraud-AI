@@ -6,9 +6,10 @@ Advanced Data Analytics
 
 from pathlib import Path
 
-import streamlit as st
 import pandas as pd
 import plotly.express as px
+import streamlit as st
+from pandas.errors import EmptyDataError
 
 st.set_page_config(
     page_title="Analytics",
@@ -19,14 +20,40 @@ st.set_page_config(
 
 @st.cache_data
 def load_data():
-    base_path = Path(__file__).resolve().parents[2]
-    data_path = base_path / "data" / "processed" / "train.csv"
 
-    if not data_path.exists():
-        st.error(f"Dataset not found:\n{data_path}")
-        st.stop()
+    base = Path(__file__).resolve().parents[2]
 
-    return pd.read_csv(data_path)
+    possible_files = [
+        base / "data" / "processed" / "train.csv",
+        base / "data" / "processed" / "cleaned_data.csv",
+    ]
+
+    for file in possible_files:
+
+        if file.exists():
+
+            try:
+                df = pd.read_csv(file)
+
+                if df.empty:
+                    continue
+
+                return df
+
+            except EmptyDataError:
+                continue
+
+    st.error("""
+❌ Dataset not available.
+
+Please generate the processed dataset first.
+
+Run:
+
+python run.py
+""")
+
+    st.stop()
 
 
 df = load_data()
@@ -34,8 +61,10 @@ df = load_data()
 st.title("📈 Advanced Fraud Analytics")
 
 st.markdown("""
-Explore transaction patterns, fraud distribution,
-feature relationships and business insights.
+Explore transaction patterns,
+fraud distribution,
+feature relationships,
+and business insights.
 """)
 
 st.divider()
@@ -43,12 +72,14 @@ st.divider()
 col1, col2 = st.columns(2)
 
 with col1:
+
     selected_class = st.selectbox(
         "Transaction Type",
         ["All", "Legitimate", "Fraud"]
     )
 
 with col2:
+
     max_amount = st.slider(
         "Maximum Amount",
         float(df["Amount"].min()),
@@ -59,42 +90,46 @@ with col2:
 filtered_df = df[df["Amount"] <= max_amount]
 
 if selected_class == "Fraud":
-    filtered_df = filtered_df[filtered_df["Class"] == 1]
+
+    filtered_df = filtered_df[
+        filtered_df["Class"] == 1
+    ]
 
 elif selected_class == "Legitimate":
-    filtered_df = filtered_df[filtered_df["Class"] == 0]
+
+    filtered_df = filtered_df[
+        filtered_df["Class"] == 0
+    ]
 
 st.divider()
 
 c1, c2, c3 = st.columns(3)
 
-with c1:
-    st.metric(
-        "Transactions",
-        len(filtered_df)
-    )
+c1.metric(
+    "Transactions",
+    len(filtered_df)
+)
 
-with c2:
-    st.metric(
-        "Frauds",
-        int(filtered_df["Class"].sum())
-    )
+c2.metric(
+    "Frauds",
+    int(filtered_df["Class"].sum())
+)
 
-with c3:
-    st.metric(
-        "Average Amount",
-        f"₹ {filtered_df['Amount'].mean():.2f}"
-    )
+c3.metric(
+    "Average Amount",
+    f"₹ {filtered_df['Amount'].mean():.2f}"
+)
 
 st.divider()
 
 left, right = st.columns(2)
 
 with left:
+
     fig = px.pie(
         filtered_df,
         names="Class",
-        hole=0.5,
+        hole=0.45,
         title="Transaction Distribution"
     )
 
@@ -104,11 +139,12 @@ with left:
     )
 
 with right:
+
     fig = px.histogram(
         filtered_df,
         x="Amount",
         nbins=60,
-        title="Amount Distribution"
+        title="Transaction Amount Distribution"
     )
 
     st.plotly_chart(
@@ -118,13 +154,14 @@ with right:
 
 st.divider()
 
+sample = filtered_df.sample(
+    min(len(filtered_df), 5000),
+    random_state=42
+)
+
 left, right = st.columns(2)
 
 with left:
-    sample = filtered_df.sample(
-        min(5000, len(filtered_df)),
-        random_state=42
-    )
 
     fig = px.scatter(
         sample,
@@ -140,11 +177,12 @@ with left:
     )
 
 with right:
+
     fig = px.box(
         filtered_df,
         x="Class",
         y="Amount",
-        title="Amount by Class"
+        title="Amount by Transaction Class"
     )
 
     st.plotly_chart(
@@ -160,8 +198,8 @@ corr = filtered_df.corr(numeric_only=True)
 
 fig = px.imshow(
     corr,
-    color_continuous_scale="RdBu_r",
-    aspect="auto"
+    aspect="auto",
+    color_continuous_scale="RdBu_r"
 )
 
 st.plotly_chart(
@@ -187,16 +225,20 @@ st.divider()
 
 st.subheader("Business Insights")
 
+frauds = int(filtered_df["Class"].sum())
+
+total = len(filtered_df)
+
+avg_amount = filtered_df["Amount"].mean()
+
+max_amount = filtered_df["Amount"].max()
+
 st.success(f"""
-### Key Observations
+### Key Insights
 
-• Total Transactions: {len(filtered_df):,}
-
-• Fraud Cases: {int(filtered_df['Class'].sum())}
-
-• Average Amount: ₹ {filtered_df['Amount'].mean():.2f}
-
-• Maximum Amount: ₹ {filtered_df['Amount'].max():.2f}
-
-• Dataset is highly imbalanced and requires fraud-aware models.
+- Total Transactions : **{total:,}**
+- Fraud Transactions : **{frauds:,}**
+- Average Amount : **₹ {avg_amount:.2f}**
+- Maximum Amount : **₹ {max_amount:.2f}**
+- Dataset is highly imbalanced, therefore fraud-aware models such as Random Forest and XGBoost are appropriate.
 """)
