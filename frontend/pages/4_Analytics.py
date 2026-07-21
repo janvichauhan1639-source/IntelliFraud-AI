@@ -24,10 +24,10 @@ def load_data():
     base = Path(__file__).resolve().parents[2]
 
     possible_files = [
-        base / "data" / "processed" / "train.csv",
-        base / "data" / "processed" / "cleaned_data.csv",
-    ]
-
+    base / "data" / "sample" / "sample_transactions.csv",
+    base / "data" / "processed" / "train.csv",
+    base / "data" / "processed" / "cleaned_data.csv",
+]
     for file in possible_files:
 
         if file.exists():
