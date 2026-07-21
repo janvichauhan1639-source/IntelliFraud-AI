@@ -499,25 +499,6 @@ The project evaluates each model using the following metrics.
 
 ---
 
-# 🌐 Live Deployment
-
-## 🚀 Frontend
-
-https://ai-powered-financial-fraud-detection-6o5j.onrender.com
-
----
-
-## ⚡ Backend API
-
-https://ai-powered-financial-fraud-detection-6mcp.onrender.com
-
----
-
-## 📖 Swagger API Documentation
-
-https://ai-powered-financial-fraud-detection-6mcp.onrender.com/docs
-
----
 
 # 🔌 REST API Endpoints
 
