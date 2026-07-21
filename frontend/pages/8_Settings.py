@@ -4,6 +4,7 @@ Settings Page
 Application Configuration & System Status
 """
 
+import os
 import streamlit as st
 import requests
 
@@ -11,6 +12,12 @@ st.set_page_config(
     page_title="Settings",
     page_icon="⚙️",
     layout="wide"
+)
+
+# Backend URL
+backend_url = os.getenv(
+    "BACKEND_URL",
+    "https://ai-powered-financial-fraud-detection-6mcp.onrender.com"
 )
 
 st.title("⚙️ Application Settings")
@@ -21,15 +28,17 @@ st.markdown(
 
 st.divider()
 
-st.subheader("🖥 Backend Status")
+# ----------------------------------------------------
+# Backend Status
+# ----------------------------------------------------
 
-backend_url = "http://127.0.0.1:8000"
+st.subheader("🖥 Backend Status")
 
 try:
 
     response = requests.get(
         f"{backend_url}/health",
-        timeout=5
+        timeout=10
     )
 
     if response.status_code == 200:
@@ -38,21 +47,21 @@ try:
 
         st.success("🟢 FastAPI Backend is Online")
 
-        col1, col2, col3 = st.columns(3)
+        c1, c2, c3 = st.columns(3)
 
-        with col1:
+        with c1:
             st.metric(
                 "Backend",
                 health.get("backend", "Online")
             )
 
-        with col2:
+        with c2:
             st.metric(
                 "Status",
                 health.get("status", "Healthy")
             )
 
-        with col3:
+        with c3:
             st.metric(
                 "Model",
                 health.get("model", "Loaded")
@@ -71,18 +80,22 @@ except Exception as e:
 
 st.divider()
 
+# ----------------------------------------------------
+# API Information
+# ----------------------------------------------------
+
 st.subheader("📡 API Information")
 
 try:
 
-    info = requests.get(
-        f"{backend_url}/info",
-        timeout=5
+    response = requests.get(
+        f"{backend_url}/",
+        timeout=10
     )
 
-    if info.status_code == 200:
+    if response.status_code == 200:
 
-        data = info.json()
+        data = response.json()
 
         c1, c2 = st.columns(2)
 
@@ -91,15 +104,15 @@ try:
             st.info(f"""
 ### 📦 Project
 
-{data.get("project")}
+AI Powered Financial Fraud Detection System
 
 ### 🌐 Framework
 
-{data.get("framework")}
+FastAPI
 
 ### 🤖 Machine Learning
 
-{data.get("machine_learning")}
+Scikit-Learn
 """)
 
         with c2:
@@ -107,17 +120,26 @@ try:
             st.info(f"""
 ### 💻 Frontend
 
-{data.get("frontend")}
+Streamlit
 
-### 🏆 Best Model
+### 🏆 Version
 
-{data.get("best_model")}
+{data.get("version","1.0.0")}
 """)
 
-except:
+    else:
+
+        st.warning("API information unavailable.")
+
+except Exception:
+
     st.warning("API information unavailable.")
 
 st.divider()
+
+# ----------------------------------------------------
+# Configuration
+# ----------------------------------------------------
 
 st.subheader("⚙️ Configuration")
 
@@ -159,12 +181,16 @@ st.text_input(
 
 st.divider()
 
+# ----------------------------------------------------
+# System Information
+# ----------------------------------------------------
 
 st.subheader("💻 System Information")
 
-col1, col2, col3 = st.columns(3)
+c1, c2, c3 = st.columns(3)
 
-with col1:
+with c1:
+
     st.success("""
 ### Backend
 
@@ -175,7 +201,8 @@ REST API
 Online
 """)
 
-with col2:
+with c2:
+
     st.success("""
 ### AI Model
 
@@ -186,7 +213,8 @@ Loaded
 Ready
 """)
 
-with col3:
+with c3:
+
     st.success("""
 ### Frontend
 
@@ -199,6 +227,10 @@ Running
 
 st.divider()
 
+# ----------------------------------------------------
+# Refresh
+# ----------------------------------------------------
+
 st.subheader("🔄 Actions")
 
 if st.button(
@@ -210,7 +242,7 @@ if st.button(
 st.divider()
 
 st.markdown(
-    """
+"""
 <div style="text-align:center;padding:20px">
 
 <h3>⚙️ AI Powered Financial Fraud Detection System</h3>
@@ -229,5 +261,5 @@ Version 1.0.0
 
 </div>
 """,
-    unsafe_allow_html=True
+unsafe_allow_html=True
 )
