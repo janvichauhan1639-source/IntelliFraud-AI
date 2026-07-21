@@ -143,20 +143,7 @@ The solution provides real-time fraud prediction together with confidence scores
 
 ---
 
-# 🎯 Objectives
 
-The objectives of IntelliFraud-AI include:
-
-- Detect fraudulent financial transactions
-- Reduce financial losses
-- Improve fraud detection accuracy
-- Automate transaction monitoring
-- Provide executive dashboards
-- Deploy AI models using REST APIs
-- Demonstrate complete Machine Learning lifecycle
-- Build an industry-level AI application
-
----
 
 # ✨ Features
 
@@ -675,27 +662,7 @@ streamlit run frontend/Home.py
 
 ---
 
-# ☁️ Cloud Deployment
 
-The application has been successfully deployed on Render.
-
-## 🚀 Live Frontend
-
-https://ai-powered-financial-fraud-detection-6o5j.onrender.com
-
----
-
-## ⚡ Live Backend API
-
-https://ai-powered-financial-fraud-detection-6mcp.onrender.com
-
----
-
-## 📖 Live Swagger Documentation
-
-https://ai-powered-financial-fraud-detection-6mcp.onrender.com/docs
-
----
 
 # 📚 Learning Outcomes
 
@@ -877,8 +844,3 @@ Built with ❤️ using
 © 2026 Janvi Chauhan
 
 </div>
-[![Live Demo](https://img.shields.io/badge/🚀-Live_Demo-success?style=for-the-badge)](https://ai-powered-financial-fraud-detection-6o5j.onrender.com)
-
-[![API Docs](https://img.shields.io/badge/API-Swagger-blue?style=for-the-badge)](https://ai-powered-financial-fraud-detection-6mcp.onrender.com/docs)
-
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/janvichauhan1639-source/IntelliFraud-AI)
