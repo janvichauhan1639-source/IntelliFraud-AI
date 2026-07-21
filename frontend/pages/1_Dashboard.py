@@ -7,16 +7,47 @@ st.set_page_config(
     page_icon="📊",
     layout="wide"
 )
+from pathlib import Path
+from pandas.errors import EmptyDataError
+
 @st.cache_data
 def load_data():
-    return pd.read_csv("data/processed/cleaned_data.csv")
 
-try:
-    df = load_data()
-except Exception:
-    st.error(" Unable to load cleaned dataset.")
+    base = Path(__file__).resolve().parents[2]
+
+    possible_files = [
+        base / "data" / "processed" / "train.csv",
+        base / "data" / "processed" / "cleaned_data.csv",
+    ]
+
+    for file in possible_files:
+
+        if file.exists():
+
+            try:
+
+                df = pd.read_csv(file)
+
+                if not df.empty:
+                    return df
+
+            except EmptyDataError:
+                pass
+
+    st.error("""
+Dataset not found.
+
+Please run:
+
+python run.py
+
+or upload a sample dataset.
+""")
+
     st.stop()
 
+
+df = load_data()
 st.title("📊 Fraud Detection Dashboard")
 st.caption("Real-Time Analytics & Business Intelligence Dashboard")
 
