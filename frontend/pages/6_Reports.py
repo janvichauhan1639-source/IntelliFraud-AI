@@ -4,8 +4,8 @@ Reports Center
 Download Reports, Models and Project Artifacts
 """
 
-import streamlit as st
 from pathlib import Path
+import streamlit as st
 
 st.set_page_config(
     page_title="Reports",
@@ -13,23 +13,34 @@ st.set_page_config(
     layout="wide"
 )
 
+BASE = Path(__file__).resolve().parents[2]
+
 st.title("📄 Reports & Download Center")
 
 st.markdown("""
 Download all project reports, trained models,
-processed datasets and machine learning artifacts.
+sample datasets and machine learning artifacts.
 """)
 
 st.divider()
 
-comparison = Path("reports/model_comparison.csv")
-dataset = Path("data/processed/cleaned_data.csv")
-model = Path("models/best_model.pkl")
-scaler = Path("models/scaler.pkl")
-features = Path("models/feature_columns.pkl")
-metadata = Path("models/metadata.json")
+comparison = BASE / "reports" / "model_comparison.csv"
 
-st.subheader("📊 Project Artifacts")
+# Dataset (sample first, processed fallback)
+sample_dataset = BASE / "data" / "sample" / "sample_transactions.csv"
+processed_dataset = BASE / "data" / "processed" / "cleaned_data.csv"
+
+if sample_dataset.exists():
+    dataset = sample_dataset
+elif processed_dataset.exists():
+    dataset = processed_dataset
+else:
+    dataset = sample_dataset
+
+model = BASE / "models" / "best_model.pkl"
+scaler = BASE / "models" / "scaler.pkl"
+features = BASE / "models" / "feature_columns.pkl"
+metadata = BASE / "models" / "metadata.json"
 
 files = [
     comparison,
@@ -45,24 +56,16 @@ available = sum(f.exists() for f in files)
 c1, c2, c3 = st.columns(3)
 
 with c1:
-    st.metric(
-        "Artifacts",
-        len(files)
-    )
+    st.metric("Artifacts", len(files))
 
 with c2:
-    st.metric(
-        "Available",
-        available
-    )
+    st.metric("Available", available)
 
 with c3:
-    st.metric(
-        "Missing",
-        len(files) - available
-    )
+    st.metric("Missing", len(files) - available)
 
 st.divider()
+
 
 def download_card(title, path, filename):
 
@@ -70,12 +73,12 @@ def download_card(title, path, filename):
 
     if path.exists():
 
+        st.success("Available")
+
         with open(path, "rb") as f:
 
-            st.success("Available")
-
             st.download_button(
-                f"⬇ Download {filename}",
+                label=f"⬇ Download {filename}",
                 data=f,
                 file_name=filename,
                 use_container_width=True
@@ -84,6 +87,7 @@ def download_card(title, path, filename):
     else:
 
         st.error("File not found")
+
 
 left, right = st.columns(2)
 
@@ -96,9 +100,9 @@ with left:
     )
 
     download_card(
-        "🧹 Clean Dataset",
+        "🧹 Sample Dataset",
         dataset,
-        "cleaned_data.csv"
+        dataset.name
     )
 
     download_card(
@@ -128,11 +132,12 @@ with right:
     )
 
 st.divider()
+
 st.subheader("📦 Artifact Status")
 
 status = {
     "Model Comparison": comparison.exists(),
-    "Clean Dataset": dataset.exists(),
+    "Dataset": dataset.exists(),
     "Best Model": model.exists(),
     "Scaler": scaler.exists(),
     "Feature Columns": features.exists(),
@@ -147,10 +152,14 @@ for name, ok in status.items():
         st.error(f"❌ {name}")
 
 st.divider()
+
 st.info("""
 All downloadable artifacts are generated automatically
 after successful model training and evaluation.
 
-These files can be used for deployment, analysis,
-and future model retraining.
+The sample dataset is included for live demo purposes,
+while the full processed dataset can be generated locally
+using:
+
+python run.py
 """)
